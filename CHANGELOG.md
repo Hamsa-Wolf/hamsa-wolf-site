@@ -334,6 +334,72 @@ From OPERATIONS.md Implementation Checklist:
 
 ---
 
+## [3.1.0] - 2025-11-20 (GitHub Deployment & Repository Cleanup)
+
+### 🚀 Production Deployment
+
+#### GitHub Repository Setup
+- Initialized Git repository in project root
+- Created `.gitignore` file with production-focused exclusions
+- Initial commit with 165 files (complete website + documentation)
+- Created remote connection to `https://github.com/Hamsa-Wolf/hamsa-wolf-site.git`
+- Set up `main` branch as primary branch
+- Successfully pushed to GitHub
+
+#### Repository Cleanup
+- Added `OPERATIONS/` to `.gitignore` (internal documentation)
+- Added `Raw/` to `.gitignore` (reference extraction files)
+- Removed 130 files from repository tracking (all internal docs and reference materials)
+- Kept only production-critical files in version control:
+  - `src/` - Production website files
+  - `assets/` - Original HamsaWolf branding
+  - `README.md` - Project documentation
+  - `CHANGELOG.md` - Build history
+  - `.gitignore` - Git configuration
+
+#### Repository Structure (Final)
+```
+hamsa-wolf-site/           (GitHub repository)
+├── src/                   (Cloudflare serves this)
+│   ├── index.html
+│   ├── privacy.html
+│   ├── terms.html
+│   └── assets/
+│       ├── fonts/         (10 Open Sans .woff2 files)
+│       ├── favicon/       (7 favicon files)
+│       ├── HWLOGO.png
+│       ├── styles.css
+│       └── main.js
+├── assets/                (Original branding)
+│   ├── HWLOGO.png
+│   ├── favicon.zip
+│   └── favicon/
+├── README.md
+├── CHANGELOG.md
+└── .gitignore
+```
+
+#### Deployment Ready
+- Repository configured for Cloudflare Pages deployment
+- Build output directory: `/src`
+- No build command needed (pre-built static files)
+- Production branch: `main`
+- All assets properly referenced with relative paths
+- Complete favicon integration
+- SSL-ready with proper meta tags
+
+#### Files Excluded from Repository (Local Only)
+- `OPERATIONS/` - 15 markdown files with build specifications and content
+- `Raw/` - 115 files including extracted reference site assets, pages, and styles
+
+#### Commit History
+1. **Initial commit (b3d997c)**: Complete website build with all files
+2. **Repository cleanup (0ea8c5f)**: Removed documentation and reference files
+
+**Deployment Status**: Ready for Cloudflare Pages 🚀
+
+---
+
 ## Metadata
 
 **Specification Version**: 1.0.0
