@@ -14,5 +14,9 @@ Thumbs.db
 *.tmp
 *.log
 
+# Documentation and reference files (not needed in production)
+OPERATIONS/
+Raw/
+
 # Keep the built files - Cloudflare needs these
 # Do NOT ignore src/
