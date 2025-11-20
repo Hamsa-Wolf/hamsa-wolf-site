@@ -252,6 +252,43 @@ section {
   background: var(--color-primary-dark);
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  z-index: 101;
+  flex-direction: column;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+}
+
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: var(--color-dark);
+  transition: all var(--transition-base);
+  border-radius: 2px;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 /* ========================================
    BUTTONS
    ======================================== */
@@ -268,6 +305,10 @@ section {
   text-decoration: none;
   transition: all var(--transition-base);
   border: 2px solid transparent;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -674,6 +715,15 @@ section {
   margin-bottom: var(--space-2);
 }
 
+.footer-contact a {
+  color: var(--color-gray-light);
+  transition: color var(--transition-base);
+}
+
+.footer-contact a:hover {
+  color: var(--color-white);
+}
+
 .footer-bottom {
   border-top: 1px solid var(--color-gray-dark);
   padding-top: var(--space-8);
@@ -729,12 +779,57 @@ section {
     --text-5xl: 2rem;
     --text-4xl: 1.75rem;
     --text-3xl: 1.5rem;
-    --container-padding: var(--space-6);
+    --container-padding: var(--space-4);
+  }
+
+  /* Mobile Navigation */
+  .mobile-menu-toggle {
+    display: flex;
   }
 
   .nav-menu {
+    position: fixed;
+    top: 73px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 73px);
+    background: var(--color-white);
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 0;
+    padding: var(--space-6) 0;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: right var(--transition-slow);
+    z-index: 99;
+    align-items: stretch;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu a {
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--color-gray-light);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-menu .nav-cta {
+    margin: var(--space-4) var(--space-6) 0;
+    min-height: 48px;
+    border: none;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Typography adjustments */
+  body {
+    line-height: 1.8;
+  }
+
+  .hero {
+    padding: var(--space-12) 0;
   }
 
   .hero-headline {
@@ -743,22 +838,100 @@ section {
 
   .hero-cta {
     flex-direction: column;
+    width: 100%;
   }
 
-  .service-cards,
-  .case-study-grid,
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  /* Section spacing */
+  section {
+    padding: var(--space-12) 0;
+  }
+
+  .services-section,
+  .case-study-section,
+  .about-section {
+    padding: var(--space-12) 0;
+  }
+
+  .cta-section {
+    padding: var(--space-16) 0;
+  }
+
+  /* Service cards - mobile optimized */
+  .service-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .service-card {
+    min-width: 280px;
+  }
+
+  /* Case study grid */
+  .case-study-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Client segments */
   .client-segments {
     grid-template-columns: 1fr;
   }
 
-  section {
-    padding: var(--space-12) 0;
+  /* Footer grid - stack to single column at mobile */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --container-padding: var(--space-4);
+  }
+
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  /* Footer - full stack on smallest screens */
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .service-cards {
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --text-5xl: 1.75rem;
+    --text-4xl: 1.5rem;
+    --text-3xl: 1.25rem;
+  }
+
+  body {
+    line-height: 1.8;
+  }
+
+  .hero-headline {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  /* Even tighter spacing for very small screens */
+  section {
+    padding: var(--space-8) 0;
+  }
+
+  .hero {
+    padding: var(--space-8) 0;
   }
 }

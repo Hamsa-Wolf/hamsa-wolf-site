@@ -4,6 +4,44 @@
  * Keep it minimal - this is a sales consulting site, not a web app.
  */
 
+// Mobile Menu Toggle Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    if (mobileMenuToggle) {
+        // Toggle menu on button click
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+
+            // Update ARIA attribute
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Close menu when clicking a nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+});
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -22,7 +60,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-menu a');
-    
+
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -31,7 +69,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').includes(current)) {
