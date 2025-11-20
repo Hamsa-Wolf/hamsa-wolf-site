@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Keep the built files - Cloudflare needs these
+# Do NOT ignore src/
